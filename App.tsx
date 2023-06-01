@@ -3,21 +3,17 @@ import "react-native-gesture-handler";
 import { StyleSheet, Text, View } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
+import { useAppScreen } from "@src/core/hooks/useAppScreen";
 
 export default function App() {
+  const { appIsReady, onLayoutRootView } = useAppScreen();
+
+  if (!appIsReady) {
+    return null;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View className="flex-1" onLayout={onLayoutRootView}>
+      <StatusBar style="light" translucent />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
